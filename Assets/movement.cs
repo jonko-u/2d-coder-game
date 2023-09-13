@@ -1,10 +1,14 @@
 using UnityEngine;
 public class PlayerController : MonoBehaviour
-{
+{ 
+
     private Rigidbody2D rb2D;
     private Vector3 velocity = Vector3.zero;
     private bool lookingAtRight = true;
-     // Declare isOnFloor as a class-level variable.
+    // Declare isOnFloor as a class-level variable.[
+    [Header("Initial Position")]
+    [SerializeField] private float initialX;
+    [SerializeField] private float initialY;
 
     [Header("Limit")]
     [SerializeField] private float minY;
@@ -59,12 +63,13 @@ public class PlayerController : MonoBehaviour
             ResetCharacterPosition();
         }
     }
-
+   
     private void ResetCharacterPosition()
-{
-    transform.position = initialPosition;
-    rb2D.velocity = Vector2.zero; // Reset the character's velocity as well.
-}
+    {
+        transform.position = new Vector3(initialX, initialY, transform.position.z);
+        rb2D.velocity = Vector2.zero; // Reset the character's velocity.
+    }
+
     private void Jump()
     {
         // Apply an upward force for jumping.
